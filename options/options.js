@@ -90,7 +90,7 @@ testBtn.addEventListener('click', async () => {
       },
       body: JSON.stringify({
         messages: [{ role: 'user', content: 'Hello' }],
-        max_tokens: 5
+        max_completion_tokens: 5
       })
     });
     

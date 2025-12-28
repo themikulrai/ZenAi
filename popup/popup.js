@@ -230,7 +230,7 @@ Content summary: ${pageContext.content?.substring(0, 2000) || 'No content availa
       },
       body: JSON.stringify({
         messages: apiMessages,
-        max_tokens: 1024,
+        max_completion_tokens: 1024,
         stream: true
       })
     });
