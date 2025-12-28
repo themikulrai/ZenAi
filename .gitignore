@@ -1,5 +1,6 @@
 # Private configuration with API keys
 config.private.js
+test_api.py
 
 # OS generated files
 .DS_Store
