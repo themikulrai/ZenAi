@@ -145,7 +145,12 @@ function addMessage(role, content, isStreaming = false) {
   
   const contentDiv = document.createElement('div');
   contentDiv.className = 'message-content';
-  contentDiv.textContent = content;
+  
+  if (role === 'assistant') {
+    contentDiv.innerHTML = renderMarkdown(content);
+  } else {
+    contentDiv.textContent = content;
+  }
   
   if (isStreaming) {
     const cursor = document.createElement('span');
@@ -271,7 +276,7 @@ Content summary: ${pageContext.content?.substring(0, 2000) || 'No content availa
               } else {
                 // Update existing message, keeping cursor
                 const cursor = messageDiv.querySelector('.streaming-cursor');
-                messageDiv.textContent = assistantMessage;
+                messageDiv.innerHTML = renderMarkdown(assistantMessage);
                 if (cursor) messageDiv.appendChild(cursor);
               }
             }
@@ -305,6 +310,42 @@ Content summary: ${pageContext.content?.substring(0, 2000) || 'No content availa
 function showStatus(message, type) {
   statusBar.textContent = message;
   statusBar.className = `status-bar ${type}`;
+}
+
+// Simple markdown renderer
+function renderMarkdown(text) {
+  if (!text) return '';
+  
+  let html = text
+    // Handle Escaping HTML
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    
+    // Bold: **text** or __text__
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/__(.*?)__/g, '<strong>$1</strong>')
+    
+    // Italic: *text* or _text_
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/_(.*?)_/g, '<em>$1</em>')
+    
+    // Inline code: `text`
+    .replace(/`(.*?)`/g, '<code>$1</code>')
+    
+    // Lists: - item or * item at start of line
+    .replace(/^\s*[-*]\s+(.*)$/gm, '<li>$1</li>');
+  
+  // Wrap list items in <ul>
+  html = html.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+  
+  // Handle new lines for non-list content
+  html = html.split('\n').map(line => {
+    if (line.includes('<li>') || line.includes('<ul>') || line.includes('</ul>')) return line;
+    return line.trim() ? `<p>${line}</p>` : '';
+  }).join('');
+
+  return html;
 }
 
 // Hide status message
