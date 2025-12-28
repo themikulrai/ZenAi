@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenAi Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">🧘</span>
+        <h1>ZenAi Settings</h1>
+      </div>
+    </header>
+
+    <main class="main">
+      <form id="settingsForm">
+        <div class="section">
+          <h2>Azure OpenAI Configuration</h2>
+          <p class="description">Enter your Azure OpenAI API credentials to connect ZenAi.</p>
+          
+          <div class="form-group">
+            <label for="apiEndpoint">API Endpoint</label>
+            <input 
+              type="url" 
+              id="apiEndpoint" 
+              placeholder="https://your-resource.openai.azure.com/"
+              required
+            >
+            <span class="hint">Your Azure OpenAI resource endpoint URL</span>
+          </div>
+
+          <div class="form-group">
+            <label for="apiKey">API Key</label>
+            <div class="password-wrapper">
+              <input 
+                type="password" 
+                id="apiKey" 
+                placeholder="Enter your API key"
+                required
+              >
+              <button type="button" class="toggle-visibility" id="toggleKey">
+                👁️
+              </button>
+            </div>
+            <span class="hint">Your Azure OpenAI API key (stored locally)</span>
+          </div>
+
+          <div class="form-group">
+            <label for="deployment">Deployment Name</label>
+            <input 
+              type="text" 
+              id="deployment" 
+              placeholder="gpt-4"
+              required
+            >
+            <span class="hint">The name of your model deployment</span>
+          </div>
+
+          <div class="form-group">
+            <label for="modelName">Model Name</label>
+            <input 
+              type="text" 
+              id="modelName" 
+              placeholder="gpt-4"
+            >
+            <span class="hint">Optional: The model name (defaults to deployment name)</span>
+          </div>
+
+          <div class="form-group">
+            <label for="apiVersion">API Version</label>
+            <input 
+              type="text" 
+              id="apiVersion" 
+              placeholder="2025-04-01-preview"
+              value="2025-04-01-preview"
+            >
+            <span class="hint">Azure OpenAI API version</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn-primary" id="saveBtn">
+            Save Settings
+          </button>
+          <button type="button" class="btn-secondary" id="testBtn">
+            Test Connection
+          </button>
+        </div>
+      </form>
+
+      <div class="status" id="status"></div>
+    </main>
+
+    <footer class="footer">
+      <p>ZenAi v1.0.0 • <a href="https://github.com/yourusername/ZenAi" target="_blank">GitHub</a></p>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

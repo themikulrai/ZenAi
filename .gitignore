@@ -1,0 +1,29 @@
+# Private configuration with API keys
+config.private.js
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temporary files
+*.log
+*.tmp
+
+# Node modules (if any)
+node_modules/
+
+# Build output
+dist/
+build/
+*.zip
